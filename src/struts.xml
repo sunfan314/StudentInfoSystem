@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.multipart.maxSize" value="10240000" />
+	
+	<constant name="struts.action.extension" value="action" />
+
+	<package name="user" extends="struts-default">
+		<action name="login">
+			<result>/jsp/login/login.jsp</result>
+		</action>
+
+		<action name="loginPro" class="com.lb.action.UserAction">
+			<result name="0">/jsp/admin/admin.jsp</result>
+			<result name="1">/jsp/teacher/teacher.jsp</result>
+			<result name="2">/jsp/student/student.jsp</result>
+			<result name="error">/jsp/login/fail.jsp</result>
+		</action>
+
+		<action name="studentManage">
+			<result>/jsp/admin/studentManage.jsp</result>
+		</action>
+
+		<action name="teacherManage">
+			<result>/jsp/admin/teacherManage.jsp</result>
+		</action>
+		
+		<action name="classManage">
+			<result>/jsp/admin/classManage.jsp</result>
+		</action>
+
+		<action name="courseManage">
+			<result>/jsp/admin/courseManage.jsp</result>
+		</action>
+
+		<action name="teacherAllocation">
+			<result>/jsp/admin/teacherAllocation.jsp</result>
+		</action>
+		
+		<action name="classStudentList" class="com.lb.action.AdminAction"
+			method="classStudentList">
+			<result name="success">/jsp/admin/classStudentList.jsp
+			</result>
+		</action>
+		
+		<action name="studentDetail" class="com.lb.action.AdminAction"
+			method="studentInfo">
+			<result name="success">/jsp/admin/studentInfo.jsp
+			</result>
+			<result name="error">/jsp/admin/studentInfoError.jsp</result>
+		</action>
+		
+		<action name="studentDetailFromTeacher" class="com.lb.action.TeacherAction"
+			method="studentInfo">
+			<result name="success">/jsp/teacher/studentInfo.jsp
+			</result>
+			<result name="error">/jsp/teacher/studentInfoError.jsp</result>
+		</action>
+
+		<action name="courseStudentManage" class="com.lb.action.TeacherAction">
+			<result name="success">/jsp/teacher/courseStudentManage.jsp
+			</result>
+		</action>
+
+		<action name="studentScoreManage" class="com.lb.action.TeacherAction"
+			method="studentScoreManage">
+			<result name="success">/jsp/teacher/studentScoreManage.jsp
+			</result>
+		</action>
+
+		<action name="studentCourse" class="com.lb.action.StudentAction">
+			<result name="success">/jsp/student/studentCourse.jsp
+			</result>
+		</action>
+		
+		<action name="studentInfo" class="com.lb.action.StudentAction"
+			method="studentInfo">
+			<result name="success">/jsp/student/studentInfo.jsp
+			</result>
+		</action>
+		
+		<action name="studentClassInfo" class="com.lb.action.StudentAction"
+			method="studentClassInfo">
+			<result name="success">/jsp/student/classInfo.jsp
+			</result>
+			<result name="error">/jsp/student/classInfoError.jsp</result>
+		</action>
+		
+		<action name="changePassword" class="com.lb.action.StudentAction"
+			method="changePassword">
+			<result name="success">/jsp/student/changePassword.jsp
+			</result>
+		</action>
+		
+		<action name="*">
+			<result>/jsp/{1}.jsp</result>
+		</action>
+
+	</package>
+
+	<package name="admin" extends="json-default">
+		<action name="getStudents" class="com.lb.action.AdminAction">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		<action name="getTeachers" class="com.lb.action.AdminAction"
+			method="getTeachers">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="getCourseInfos" class="com.lb.action.AdminAction"
+			method="getCourseInfos">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="getClassList" class="com.lb.action.AdminAction"
+			method="getClassList">
+			<result type="json">
+				<param name="root">jsonArray</param>
+			</result>
+		</action>
+
+		<action name="getCourseList" class="com.lb.action.AdminAction"
+			method="getCourseList">
+			<result type="json">
+				<param name="root">jsonArray</param>
+			</result>
+		</action>
+
+		<action name="getCourseTeacherList" class="com.lb.action.AdminAction"
+			method="getCourseTeacherList">
+			<result type="json">
+				<param name="root">jsonArray</param>
+			</result>
+		</action>
+
+		<action name="getOtherTeacherList" class="com.lb.action.AdminAction"
+			method="getAvailableTeachers">
+			<result type="json">
+				<param name="root">jsonArray</param>
+			</result>
+		</action>
+
+		<action name="getTeacherCourses" class="com.lb.action.TeacherAction"
+			method="getTeacherCourses">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="getCourseStudents" class="com.lb.action.TeacherAction"
+			method="getCourseStudents">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="getCourseStudentScore" class="com.lb.action.TeacherAction"
+			method="getCourseStudentScore">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="getStudentCourses" class="com.lb.action.StudentAction"
+			method="getStudentCourses">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="getStudentInfo" class="com.lb.action.StudentAction"
+			method="getStudentInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="getStudentClassInfo" class="com.lb.action.StudentAction"
+			method="getStudentClassInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="getJsonStudentInfo" class="com.lb.action.StudentAction"
+			method="getJsonStudentInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="getClassStudents" class="com.lb.action.AdminAction"
+			method="getClassStudents">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="addStudent" class="com.lb.action.AdminAction"
+			method="addStudent">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="addTeacher" class="com.lb.action.AdminAction"
+			method="addTeacher">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="addCourseInfo" class="com.lb.action.AdminAction"
+			method="addCourseInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="addCourseTeacher" class="com.lb.action.AdminAction"
+			method="addTeacherToCourse">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="addCourseStudents" class="com.lb.action.TeacherAction"
+			method="addCourseStudents">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="addClassStudents" class="com.lb.action.AdminAction"
+			method="addClassStudents">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+
+		<action name="editStudent" class="com.lb.action.AdminAction"
+			method="updateStudent">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="addClass" class="com.lb.action.AdminAction"
+			method="addClass">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="editTeacher" class="com.lb.action.AdminAction"
+			method="updateTeacher">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="editCourseInfo" class="com.lb.action.AdminAction"
+			method="updateCourseInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="editClass" class="com.lb.action.AdminAction"
+			method="updateClass">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="updateStudentCourseScore" class="com.lb.action.TeacherAction"
+			method="updateStudentCourseScore">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="updateStudentInfo" class="com.lb.action.StudentAction"
+			method="updateStudentInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="updatePassword" class="com.lb.action.StudentAction"
+			method="updatePassword">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="deleteUser" class="com.lb.action.AdminAction"
+			method="deleteUser">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="deleteCourseInfo" class="com.lb.action.AdminAction"
+			method="deleteCourseInfo">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="deleteCourseTeacher" class="com.lb.action.AdminAction"
+			method="deleteTeacherFromCourse">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+
+		<action name="deleteCourseStudents" class="com.lb.action.TeacherAction"
+			method="deleteCourseStudents">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="deleteClass" class="com.lb.action.AdminAction"
+			method="deleteClass">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="deleteClassStudents" class="com.lb.action.AdminAction"
+			method="deleteClassStudents">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+		</action>
+		
+		<action name="uploadFile" class="com.lb.action.StudentAction"
+			method="uploadFile">
+			<result type="json">
+				<param name="root">json</param>
+			</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">40960000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+	</package>
+
+
+
+
+</struts>   
